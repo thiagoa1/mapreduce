@@ -1,7 +1,7 @@
 from mrjob.job import MRJob
 from mrjob.step import MRStep
 
-class Movies1(MRJob):
+class Movies2(MRJob):
     
     def mapper(self, _, line):
         (user_id, movie_id, rating, timestamp) = line.split('\t')
@@ -12,8 +12,9 @@ class Movies1(MRJob):
 
     def reducer_sort(self, value_none, values):
         valuesList = list(values)
-        sortedValues = sorted(valuesList)
-        for value in sortedValues:
+        descSortedValues = list(reversed(sorted(valuesList)))
+        result = descSortedValues[:10]
+        for value in result:
             yield value[0], value[1]    
 
     def steps(self):
@@ -25,4 +26,4 @@ class Movies1(MRJob):
         ]
 
 if __name__ == '__main__':
-    Movies1.run()
+    Movies2.run()

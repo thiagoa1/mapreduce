@@ -15,9 +15,9 @@ class Heroes(MRJob):
     def steps(self):
         return [
             MRStep(mapper=self.mapper,
-                    reducer=self.reducer),
-            MRStep(
-                reducer=self.reducer_sort)
+                    reducer=self.reducer)
+            #MRStep(
+             #   reducer=self.reducer_sort)
         ]
 
 if __name__ == '__main__':
