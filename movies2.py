@@ -15,7 +15,7 @@ class Movies2(MRJob):
         descSortedValues = list(reversed(sorted(valuesList)))
         result = descSortedValues[:10]
         for value in result:
-            yield value[0], value[1]    
+            yield value[1], value[0]    
 
     def steps(self):
         return [

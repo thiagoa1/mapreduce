@@ -14,7 +14,7 @@ class Movies1(MRJob):
         valuesList = list(values)
         sortedValues = sorted(valuesList)
         for value in sortedValues:
-            yield value[0], value[1]    
+            yield value[1], value[0]
 
     def steps(self):
         return [
