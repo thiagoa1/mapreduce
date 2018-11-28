@@ -10,14 +10,21 @@ class Heroes(MRJob):
         yield hero_id, friends_count
     
     def reducer(self, hero_id, values):
-        yield hero_id, sum(values)
+        yield None, (sum(values), hero_id)
 
+    def reducer_sort(self, key, values):
+        valuesList = list(values)
+        sortedValues = sorted(valuesList)
+        yield sortedValues[-1][1],  sortedValues[-1][0]
+        #for v in sortedValues:
+        #    yield v[1],  v[0]
+        
     def steps(self):
         return [
             MRStep(mapper=self.mapper,
-                    reducer=self.reducer)
-            #MRStep(
-             #   reducer=self.reducer_sort)
+                    reducer=self.reducer),
+            MRStep(
+                reducer=self.reducer_sort)
         ]
 
 if __name__ == '__main__':
